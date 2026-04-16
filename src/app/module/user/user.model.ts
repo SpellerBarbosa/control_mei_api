@@ -2,7 +2,17 @@ import mongoose, { Schema } from "mongoose";
 import { Roles } from "../common/constants.js";
 import bcrypt from "bcrypt";
 
-const userModel = new Schema(
+interface UserMethods{
+  comparePassword(candidatePassword: string): Promise<boolean>;
+}
+
+interface UserDocument {
+  username: string,
+  password: string,
+  role: "admin" | "user"
+}
+
+const userModel = new Schema<UserDocument, mongoose.Model<UserDocument, {}, UserMethods>,UserMethods>(
   {
     username: {
       type: String,

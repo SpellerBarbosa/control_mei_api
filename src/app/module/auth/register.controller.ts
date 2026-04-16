@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { userSchema } from "./user.schema.js";
-import userRegister from "./user-register.service.js";
+import { userSchema } from "../user/user.schema.js";
+import userRegister from "./register.service.js";
 
 const registerController = async (req: Request, res: Response) => {
   try {

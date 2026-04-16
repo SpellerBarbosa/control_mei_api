@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { userController } from "../module/index.js";
+import { registerController } from "../module/index.js";
 
 
 const userRouter = Router();
 
-userRouter.post('/api/register', userController)
+userRouter.post("/api/register", registerController);
 
 export default userRouter;

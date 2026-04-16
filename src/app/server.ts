@@ -1,33 +1,36 @@
-import express from "express";
-import ConnectToDb from "./config/ConnectToDB.js";
-import { userRouter } from "./routes/index.js";
+import express from 'express';
+import ConnectToDb from './config/ConnectToDB.js';
+import { authRouter, userRouter } from './routes/index.js';
 
 class App {
-  private expressApp: express.Application;
-  private port: number;
-  constructor() {
-    this.expressApp = express();
-    this.port = 3000;
+	private expressApp: express.Application;
+	private port: number;
+	constructor() {
+		this.expressApp = express();
+		this.port = 3000;
 
-    this.middlewares()
-    this.routes();
-  }
+		this.middlewares();
+		this.routes();
+	}
 
-  private middlewares(){
-    this.expressApp.use(express.json());
-  }
+	private middlewares() {
+		this.expressApp.use(express.json());
+	}
 
-  private routes(){
-    this.expressApp.use(userRouter)
-  }
+	private routes() {
+		this.expressApp.use(userRouter);
+		this.expressApp.use(authRouter);
+	}
 
-  public async start() {
-    await ConnectToDb();
+	public async start() {
+		await ConnectToDb();
 
-    this.expressApp.listen(this.port, () => {
-      console.log(`Api connectada na porta http://localhost:${this.port}`);
-    });
-  }
+		this.expressApp.listen(this.port, () => {
+			console.log(
+				`Api connectada na porta http://localhost:${this.port}`,
+			);
+		});
+	}
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import User from "./user.model.js";
+import User from "../user/user.model.js";
 import { Roles } from "../common/constants.js";
 
 type Role = (typeof Roles)[number];
@@ -8,7 +8,7 @@ interface RegisterResponse {
   statusCode: number;
 }
 
-const userRegister = async (
+const registerService = async (
   username: string,
   password: string,
   role: Role,
@@ -57,4 +57,4 @@ const userRegister = async (
   }
 };
 
-export default userRegister;
+export default registerService;
