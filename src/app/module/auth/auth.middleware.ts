@@ -7,5 +7,10 @@ export const authLimiter = rateLimit({
     limit: 5, // 5 tentativas
     standardHeaders: true,
     legacyHeaders: false,
-    ipv6Subnet: 56
+    ipv6Subnet: 56,
+    handler:(_req, res) =>{
+        return res.status(429).json({
+            message: "Muitas tentativas de login, tente novamente mais tarde."
+        })
+    }
 })
