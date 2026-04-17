@@ -15,9 +15,16 @@ const authController = async (req: Request, res: Response) => {
 
 	try {
 		const result = await authService(username, password);
-		return res
-			.status(result.statusCode)
-			.json({ message: result.message, token: result.token });
+
+		res.cookie('token', result.token, {
+			httpOnly: true,
+			secure: true,
+			sameSite: 'strict',
+			path: '/',
+			maxAge: 4 * 60 * 60 * 1000,
+		});
+
+		return res.status(result.statusCode).json({ message: result.message });
 	} catch (error) {
 		console.error(error);
 		return res.status(500).json({ message: 'Erro interno no servidor' });

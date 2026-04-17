@@ -1,1 +1,1 @@
-export { default as registerController } from "./auth/register.controller.js";
+export { default as registerController } from './auth/register.controller.js';

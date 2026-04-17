@@ -27,9 +27,7 @@ export const userSchema = z.object({
 	),
 	role: z.enum(Roles, {
 		error: (issue) =>
-			issue.input === undefined
-				? 'Role e obrigatoria'
-				: 'Role invalida',
+			issue.input === undefined ? 'Role e obrigatoria' : 'Role invalida',
 	}),
 });
 
